@@ -1,0 +1,19 @@
+name: Deploy AI Code Review Bot
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      - name: Install Dependencies
+        run: pip install -r ai_code_review_bot/backend/requirements.txt
+      - name: Run Tests
+        run: pytest ai_code_review_bot/backend/tests/
+
